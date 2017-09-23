@@ -59,19 +59,16 @@
   }
 
   function buildTemplate(userComments, userId, index) {
-    const template = [];
     const previous = userComments[index - 1];
     const next = userComments[index + 1];
-    template.push('Navigation [');
-    template.push('<span class="navprevious">');
-    template.push(previous ? `<a href="${previous}">«</a>` : '«');
-    template.push('</span>');
-    template.push(`<span class="pickerButton" data-commentid="${index}" data-userid="${userId}">≡</span>`);
-    template.push('<span class="navnext">');
-    template.push(next ? `<a href="${next}">»</a>` : '»');
-    template.push('</span>');
-    template.push(']');
-    return template.join('');
+    return `Navigation [
+      <span class="navprevious">
+      ${previous ? `<a href="${previous}">«</a></span>` : '«'}
+      <span class="pickerButton" data-commentid="${index}" data-userid="${userId}">≡</span>
+      <span class="navnext">
+      ${next ? `<a href="${next}">»</a>` : '»'}
+      </span>
+    ]`;
   }
 
   function highlightUserComment(comment) {
@@ -103,7 +100,7 @@
     Object.keys(userCommentsList).forEach(function (user) {
       qsa(`.comments[data-userid="${user}"`).forEach(function (comment, index) {
         if (userId === user) highlightUserComment(comment);
-        const template = buildTemplate(userCommentsList[user], userId, index);
+        const template = buildTemplate(userCommentsList[user], user, index);
         qs('.smallcopy', comment).insertAdjacentHTML('beforeend', template);
       });
     });

@@ -1,5 +1,6 @@
 {
-  "extends": "airbnb-base",
+  "plugins": ["no-unsanitized"],
+  "extends": ["plugin:no-unsanitized/DOM", "airbnb-base"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"

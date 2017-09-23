@@ -1,0 +1,43 @@
+.userpost {
+  background-color: #1883B1;
+}
+
+.navigation {
+  margin-left: 0.2em;
+  margin-right: 0.5em;
+}
+
+.navprevious,
+.navnext,
+.pickerButton {
+  color: #CCC599;
+  font-weight: bold;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+}
+
+.pickerButton {
+  cursor: pointer;
+}
+
+#picker {
+  display: none;
+  background-color: #006699;
+  width: 20px;
+  height: auto;
+  padding: 0.2em;
+  border: 1px solid #dfdfdf;
+  color: #CCC599;
+}
+
+#picker ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+#picker ul li.active:hover {
+  background-color: #3A90B8;
+  cursor: pointer;
+}

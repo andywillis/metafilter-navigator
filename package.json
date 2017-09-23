@@ -1,0 +1,12 @@
+{
+  "name": "uws-metafilter-navigator",
+  "version": "1.0.0",
+  "description": "Web extension version of the Metafilter Navigator Greasemonkey script.",
+  "author": "Andy Willis",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.6.0",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0"
+  }
+}

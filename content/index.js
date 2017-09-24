@@ -46,7 +46,6 @@
     qs('body').insertAdjacentHTML('afterend', html);
   }
 
-
   /**
    * For each comment grab the list of links in the
    * smallcopy section, generate a userId and commentId,
@@ -69,11 +68,10 @@
     return reduceUserComments(userComments);
   }
 
-
   /**
    * If a user has only one comment remove the user
    * from the comment dictionary
-   * @param {any} userComments 
+   * @param {any} userComments
    * @returns Updated userComments
    */
   function reduceUserComments(userComments) {
@@ -88,8 +86,8 @@
    * grab the comments written by that user, and attach the
    * navigation controls to the smallcopy section. If the
    * comments belong to the logged-in user highlight them.
-   * @param {any} userCommentsList 
-   * @param {any} userId 
+   * @param {any} userCommentsList
+   * @param {any} userId
    */
   function updateMultiComments(userCommentsList, userId) {
     Object.keys(userCommentsList).forEach(function (user) {
@@ -105,15 +103,14 @@
     comment.classList.add('userpost');
   }
 
-
   /**
    * The template for the navigation controls. A left
    * arrow to go back one comment, a right arrow to go forward,
    * and a central list that shows all comments by that user,
    * numerically.
-   * @param {any} userComments 
-   * @param {any} userId 
-   * @param {any} index 
+   * @param {any} userComments
+   * @param {any} userId
+   * @param {any} index
    * @returns Completed template
    */
   function buildTemplate(userComments, userId, index) {
@@ -129,13 +126,12 @@
     ]`;
   }
 
-
   /**
    * The central list, or picker, of the navigation
    * controls. Uses a simple HTML <ul> to capture
    * the clickable user comment links.
-   * @param {any} userComments 
-   * @param {any} commentId 
+   * @param {any} userComments
+   * @param {any} commentId
    * @returns picker HTML
    */
   function buildPicker(userComments, commentId) {

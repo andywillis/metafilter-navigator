@@ -1,5 +1,5 @@
 {
-  "name": "uws-metafilter-navigator",
+  "name": "metafilter-navigator",
   "version": "1.0.0",
   "description": "Web extension version of the Metafilter Navigator Greasemonkey script.",
   "author": "Andy Willis",

@@ -1,32 +1,65 @@
-.userpost {
-  background-color: #1883B1;
+.wwwcolor {
+  background-color: #1177AA; /* #006699 */
+}
+
+.askcolor {
+  background-color: #537857; /* #426746 */
+}
+
+.metatalkcolor {
+  background-color: #777777; /* #666666 */
+}
+
+.fanfarecolor {
+  background-color: #4D4564; /* #3C3453 */
+}
+
+.projectscolor {
+  background-color: #3E6B6B; /* #2D5A5A */
+}
+
+.musiccolor {
+  background-color: #444444; /* #333333 */
+}
+
+.podcastcolor {
+  background-color: #777777; /* #666666 */
 }
 
 .navigation {
-  margin-left: 0.2em;
-  margin-right: 0.5em;
+  margin-left: 3px;
+  font-weight: normal;
 }
 
 .navprevious,
 .navnext,
 .pickerButton {
   color: #CCC599;
-  font-weight: bold;
-  margin-left: 0.1em;
-  margin-right: 0.1em;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.navprevious a,
+.navnext a,
+.pickerButton a {
+  font-weight: normal;
 }
 
 .pickerButton {
   cursor: pointer;
 }
 
+.navigator .text {
+  font-size: 90%;
+}
+
 #picker {
   display: none;
   background-color: #006699;
-  width: 20px;
+  width: 30px;
   height: auto;
   padding: 0.2em;
-  border: 1px solid #dfdfdf;
+  border: 2px solid #dfdfdf;
   color: #CCC599;
 }
 
@@ -37,7 +70,11 @@
   text-align: center;
 }
 
-#picker ul li.active:hover {
+.inactive {
+  opacity: 0.5;
+}
+
+#picker ul li:not(.inactive):hover {
   background-color: #3A90B8;
   cursor: pointer;
 }

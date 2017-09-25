@@ -8,6 +8,8 @@
     return context.querySelectorAll(selector);
   }
 
+  let pickerVisible = false;
+
   /**
    * Grab the subsite name, the userId from
    * the site cookie, then proceed with generating
@@ -20,7 +22,8 @@
     if (hasSite(site)) {
       addPicker();
       const userCommentsList = wrangleComments();
-      updateMultiComments(userCommentsList, userId);
+      highlightUserComments(userId, site);
+      updateMultiComments(userCommentsList);
       addPickerListeners(userCommentsList);
     }
   }
@@ -89,18 +92,19 @@
    * @param {any} userCommentsList
    * @param {any} userId
    */
-  function updateMultiComments(userCommentsList, userId) {
+  function updateMultiComments(userCommentsList) {
     Object.keys(userCommentsList).forEach(function (user) {
       qsa(`.comments[data-userid="${user}"`).forEach(function (comment, index) {
-        if (userId === user) highlightUserComment(comment);
         const template = buildTemplate(userCommentsList[user], user, index);
         qs('.smallcopy', comment).insertAdjacentHTML('beforeend', template);
       });
     });
   }
 
-  function highlightUserComment(comment) {
-    comment.classList.add('userpost');
+  function highlightUserComments(userId, site) {
+    qsa(`.comments[data-userid="${userId}"]`).forEach(function (comment) {
+      comment.classList.add(`${site}color`);
+    });
   }
 
   /**
@@ -116,14 +120,16 @@
   function buildTemplate(userComments, userId, index) {
     const previous = userComments[index - 1];
     const next = userComments[index + 1];
-    return `Navigation [
+    return `<span class="navigator">[
       <span class="navprevious">
-      ${previous ? `<a href="${previous}">«</a></span>` : '«'}
-      <span class="pickerButton" data-commentid="${index}" data-userid="${userId}">≡</span>
-      <span class="navnext">
-      ${next ? `<a href="${next}">»</a>` : '»'}
+      ${previous ? `<a href="${previous}">«</a>` : '<span class="inactive">«</span>'}
       </span>
-    ]`;
+      <span class="pickerButton" data-commentid="${index}" data-userid="${userId}">≡
+      </span>
+      <span class="navnext">
+      ${next ? `<a href="${next}">»</a>` : '<span class="inactive">»</span>'}
+      </span>
+    ] <span class="text">(${index + 1}/${userComments.length})</span></span>`.replace(/\n\s+/g, '');
   }
 
   /**
@@ -138,8 +144,8 @@
     const picker = [];
     picker.push('<ul>');
     const items = userComments.map((comment, index) => {
-      if (commentId === index) return `<li>${index}</li>`;
-      return `<li data-href="${comment}" class="active">${index}</li>`;
+      if (commentId === index) return `<li class="inactive">${index + 1}</li>`;
+      return `<li data-href="${comment}">${index + 1}</li>`;
     }).join('');
     picker.push(items);
     picker.push('</ul>');
@@ -157,15 +163,34 @@
 
   function showPicker(userComments, commentId, event) {
     const html = buildPicker(userComments, commentId);
+    console.log(event)
     const picker = qs('#picker');
     picker.innerHTML = html;
     picker.style.left = `${event.pageX}px`;
     picker.style.top = `${event.pageY}px`;
     picker.style.display = 'inline';
     picker.style.position = 'absolute';
+    pickerVisible = true;
     qsa('li', picker).forEach(function (li) {
       li.addEventListener('click', gotoLink.bind(this, picker), false);
     });
+    addPageListener(picker);
+  }
+
+  function addPageListener(picker) {
+    qs('#page').addEventListener('click', hidePicker.bind(this, picker), false);
+  }
+
+  function removePageListener() {
+    qs('#page').removeEventListener('click');
+  }
+
+  function hidePicker(picker, e) {
+    if (pickerVisible && e.target.parentElement.className !== 'navigator') {
+      picker.style.display = 'none';
+      pickerVisible = false;
+      removePageListener();
+    }
   }
 
   function gotoLink(picker, e) {

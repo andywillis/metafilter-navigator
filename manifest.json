@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "uws-metafilter-navigator",
-  "version": "1.1",
-  "description": "Web extension version of the Metafilter Navigator Greasemonkey script.",
+  "name": "metafilter-navigator",
+  "version": "1.0",
+  "description": "Unofficial Metafilter web extension of provide better navigation.",
   "icons": {
     "48": "icons/icon-48.png",
     "64": "icons/icon-64.png",

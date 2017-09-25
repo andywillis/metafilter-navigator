@@ -8,6 +8,7 @@
     return context.querySelectorAll(selector);
   }
 
+  const webextName = 'navigator';
   let pickerVisible = false;
 
   /**
@@ -103,7 +104,7 @@
 
   function highlightUserComments(userId, site) {
     qsa(`.comments[data-userid="${userId}"]`).forEach(function (comment) {
-      comment.classList.add(`${site}color`);
+      comment.classList.add(`${site}color_${webextName}`);
     });
   }
 

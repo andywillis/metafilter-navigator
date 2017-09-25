@@ -1,3 +1,31 @@
+.wwwcolor_bg_navigator {
+  background-color: #006699
+}
+
+.askcolor_bg_navigator {
+  background-color: #426746
+}
+
+.metatalkcolor_bg_navigator {
+  background-color: #666666
+}
+
+.fanfarecolor_bg_navigator {
+  background-color: #3C3453
+}
+
+.projectscolor_bg_navigator {
+  background-color: #2D5A5A
+}
+
+.musiccolor_bg_navigator {
+  background-color: #333333;
+}
+
+.podcastcolor_bg_navigator {
+  background-color: #666666
+}
+
 .wwwcolor_navigator {
   background-color: #1177AA; /* #006699 */
 }
@@ -55,12 +83,12 @@
 
 #picker {
   display: none;
-  background-color: #006699;
+  background-color: #565656;
   width: 30px;
   height: auto;
   padding: 0.2em;
   border: 2px solid #dfdfdf;
-  color: #CCC599;
+  color: #efefef;
 }
 
 #picker ul {
@@ -70,11 +98,15 @@
   text-align: center;
 }
 
+#picker ul li {
+  padding: 5px;
+}
+
 .inactive {
   opacity: 0.5;
 }
 
 #picker ul li:not(.inactive):hover {
-  background-color: #3A90B8;
+  background-color: #787878;
   cursor: pointer;
 }

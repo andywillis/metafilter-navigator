@@ -21,11 +21,11 @@
     const site = getSite();
     const userId = getUserId();
     if (hasSite(site)) {
-      addPicker();
+      addPicker(site);
       const userCommentsList = wrangleComments();
       highlightUserComments(userId, site);
       updateMultiComments(userCommentsList);
-      addPickerListeners(userCommentsList);
+      addPickerListeners(userCommentsList, site);
     }
   }
 
@@ -45,8 +45,8 @@
     return cookie.match(/USER_ID=(\d+);/)[1];
   }
 
-  function addPicker() {
-    const html = '<div id="picker"></div>';
+  function addPicker(site) {
+    const html = `<div class="${site}color_bg_${webextName}" id="picker"></div>`;
     qs('body').insertAdjacentHTML('afterend', html);
   }
 
@@ -141,11 +141,11 @@
    * @param {any} commentId
    * @returns picker HTML
    */
-  function buildPicker(userComments, commentId) {
+  function buildPicker(userComments, commentId, site) {
     const picker = [];
-    picker.push('<ul>');
+    picker.push(`<ul>`);
     const items = userComments.map((comment, index) => {
-      if (commentId === index) return `<li class="inactive">${index + 1}</li>`;
+      if (commentId === index) return `<li class="${site}color_${webextName} inactive">${index + 1}</li>`;
       return `<li data-href="${comment}">${index + 1}</li>`;
     }).join('');
     picker.push(items);
@@ -153,18 +153,17 @@
     return picker.join('');
   }
 
-  function addPickerListeners(userCommentsList) {
+  function addPickerListeners(userCommentsList, site) {
     qsa('.pickerButton').forEach(function (picker) {
       const userId = picker.getAttribute('data-userid');
       const commentId = parseInt(picker.getAttribute('data-commentid'), 10);
       const userComments = userCommentsList[userId];
-      picker.addEventListener('click', showPicker.bind(this, userComments, commentId), false);
+      picker.addEventListener('click', showPicker.bind(this, userComments, commentId, site), false);
     });
   }
 
-  function showPicker(userComments, commentId, event) {
-    const html = buildPicker(userComments, commentId);
-    console.log(event)
+  function showPicker(userComments, commentId, site, event) {
+    const html = buildPicker(userComments, commentId, site);
     const picker = qs('#picker');
     picker.innerHTML = html;
     picker.style.left = `${event.pageX}px`;

@@ -63,7 +63,7 @@
       const links = qsa('.smallcopy a', comment);
       if (links.length) {
         const userId = links[0].href.split('/').pop();
-        const commentId = links[1].href;
+        const commentId = links[links[1].classList.contains('staff') ? 2 : 1].href;
         userComments[userId] = userComments[userId] || [];
         userComments[userId].push(commentId);
         comment.setAttribute('data-userid', userId);
